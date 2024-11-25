@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "./Product.css"
 
-const Product = ({key, title, price, thumbnail}) => {
+const Product = ({title, price, thumbnail, comments}) => {
+  const [newComment, setNewComment] = useState('');
+
+  const handleCommentChange = (event) => {
+    setNewComment(event.target.value);
+  };
+
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    if (newComment.trim()) {
+      comments.push(newComment);
+      setNewComment('');
+    }
+  };
+
   return (
     <div className="max-w-sm  rounded overflow-hidden shadow-lg m-5 mt-10 bg-white hover:shadow-xl transition-shadow duration-300">
       <div className="relative h-48 overflow-hidden">
@@ -23,7 +37,24 @@ const Product = ({key, title, price, thumbnail}) => {
         >
           Ajouter au panier
         </button>
+        
       </div>
+      <div>
+        {comments.map((e, index) => (
+          <p key={index} className='bg-blue-500 m-5 text-white p-5'>{e}</p>
+        ))}
+      </div>
+      
+      <form onSubmit={handleCommentSubmit}>
+        <label htmlFor={`comment-${title}`}>Entrez votre commentaire : </label>
+        <input 
+          type="text" 
+          id={`comment-${title}`} 
+          value={newComment} 
+          onChange={handleCommentChange} 
+        />
+        <input type="submit" value="Soumettre" />
+      </form>
     </div>
   )
 }
