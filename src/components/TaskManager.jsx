@@ -32,8 +32,8 @@ class TaskForm extends Component {
           style={{ marginLeft: "10px" }}
           required
         />
-        <button onClick={addTask} style={{ marginLeft: "10px" }}>
-          Ajouter
+        <button onClick={addTask} style={{ marginLeft: "10px", padding :"5px" }}>
+          <i className="fas fa-plus"></i> Ajouter
         </button>
       </div>
     );
@@ -133,11 +133,11 @@ class Task extends Component {
             <h3>{task.title}</h3>
             <p>Catégorie : {task.category}</p>
             <p>Échéance : {task.dueDate}</p>
-            <button onClick={this.handleEditToggle} style={{ marginRight: "10px" }}>
+            <button onClick={this.handleEditToggle} className="modify" style={{ marginRight: "10px" }}>
               Modifier
             </button>
-            <button onClick={() => deleteTask(task.id)} style={{ color: "red" }}>
-              Supprimer
+            <button onClick={() => deleteTask(task.id)} className="delete">
+              <i className="fas fa-trash"></i> Supprimer
             </button>
           </>
         )}
